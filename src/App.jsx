@@ -1,7 +1,11 @@
+import Navbar from "./components/shared/Navbar/Navbar";
+import Home from "./pages/Home/Home";
+
 function App() {
   return (
     <>
-      <h1>main</h1>
+      <Navbar />
+      <Home />
     </>
   );
 }
