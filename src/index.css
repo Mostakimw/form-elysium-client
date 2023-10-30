@@ -5,3 +5,7 @@
 .active {
   @apply font-medium tracking-wide text-blue-600 underline;
 }
+
+.my-btn {
+  @apply bg-purple-700 py-1 px-4 rounded-md text-white text-xl font-semibold;
+}

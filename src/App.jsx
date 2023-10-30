@@ -1,11 +1,13 @@
+import { Outlet } from "react-router-dom";
 import Navbar from "./components/shared/Navbar/Navbar";
-import Home from "./pages/Home/Home";
 
 function App() {
   return (
     <>
       <Navbar />
-      <Home />
+      <div className="min-h-[calc(100vh-288px)]">
+        <Outlet />
+      </div>
     </>
   );
 }

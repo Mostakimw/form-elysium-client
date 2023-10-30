@@ -5,7 +5,7 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   const navLinks = (
-    <ul className="text-sm lg:flex gap-4 mx-auto">
+    <>
       <li>
         <NavLink
           to="/"
@@ -30,7 +30,7 @@ const Navbar = () => {
           Dashboard
         </NavLink>
       </li>
-    </ul>
+    </>
   );
 
   return (
@@ -71,7 +71,10 @@ const Navbar = () => {
             isOpen ? "block" : "hidden"
           }`}
         >
-          {navLinks}
+          <ul className="text-sm lg:flex gap-4 mx-auto">{navLinks}</ul>
+          <div>
+            <Link to="/login">Login</Link>
+          </div>
         </div>
       </nav>
     </div>
