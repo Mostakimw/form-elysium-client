@@ -72,7 +72,7 @@ const Categorize = () => {
               <ul
                 ref={provided.innerRef}
                 {...provided.droppableProps}
-                className="mt-5 max-w-md h-fit"
+                className="mt-5 max-w-md"
               >
                 {categories.map((categoryAnswer, index) => (
                   // Use Draggable for each list item

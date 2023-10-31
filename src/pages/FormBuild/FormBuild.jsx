@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Categorize from "./Categorize";
+import Cloze from "./Cloze";
 
 const FormBuild = () => {
   const [formName, setFormName] = useState("");
@@ -56,8 +57,11 @@ const FormBuild = () => {
         </div>
 
         {/* Rendering Questions types here */}
-        <div className="mt-5 flex flex-col items-center justify-center">
+        <div className="mt-12 flex flex-col items-center justify-center">
           {selectedOption === "categorize" && <Categorize />}
+        </div>
+        <div className="mt-8 flex flex-col justify-center">
+          {selectedOption === "cloze" && <Cloze />}
         </div>
       </div>
     </div>
