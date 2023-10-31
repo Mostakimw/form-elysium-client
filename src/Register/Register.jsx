@@ -1,16 +1,22 @@
 import { useContext, useState } from "react";
 import { AuthContext } from "../providers/AuthProvider";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import saveUserToDb from "../api/Auth";
 
 const Register = () => {
   const { registerUser, updateUserProfile } = useContext(AuthContext);
-  console.log(updateUserProfile);
   const [user, setUser] = useState(false);
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
+  const userData = { email, name };
+  console.log(userData);
+
+  const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
   // ! registration handler
   const handleRegister = (e) => {
     e.preventDefault();
@@ -27,7 +33,11 @@ const Register = () => {
         setUser(true);
         setSuccess("Registration Successful");
         updateUserProfile(name)
-          .then(() => {})
+          .then(() => {
+            // save user to db
+            saveUserToDb(userData);
+            navigate(from, { replace: true });
+          })
           .catch(() => {});
       })
       .catch(() => {

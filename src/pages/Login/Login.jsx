@@ -1,6 +1,7 @@
 import { useContext, useState } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../providers/AuthProvider";
+import saveUserToDb from "../../api/Auth";
 
 const Login = () => {
   const { loginUser, user, googleLogin } = useContext(AuthContext);
@@ -24,7 +25,15 @@ const Login = () => {
   };
 
   const handleGoogle = () => {
-    googleLogin().then(() => {
+    googleLogin().then((result) => {
+      //save user data
+      console.log("google", result.user);
+      const userData = {
+        email: result?.user?.email,
+        name: result?.user?.displayName,
+      };
+      console.log(userData);
+      saveUserToDb(userData);
       navigate(from, { replace: true });
     });
   };
