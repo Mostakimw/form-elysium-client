@@ -7,6 +7,11 @@ const FormBuild = () => {
   const [formName, setFormName] = useState("");
   const [selectedOption, setSelectedOption] = useState("");
 
+  const [categorizeData, setCategorizeData] = useState({});
+  const [clozeData, setClozeData] = useState({});
+  const [comprehensionData, setComprehensionData] = useState([]);
+  console.log("object from build", comprehensionData);
+
   const handleFormNameChange = (e) => {
     const newName = e.target.value;
     setFormName(newName);
@@ -59,13 +64,17 @@ const FormBuild = () => {
 
         {/* Rendering Questions types here */}
         <div className="flex flex-col items-center justify-center">
-          {selectedOption === "categorize" && <Categorize />}
+          {selectedOption === "categorize" && (
+            <Categorize setCategorizeData={setCategorizeData} />
+          )}
         </div>
         <div className="flex flex-col justify-center">
-          {selectedOption === "cloze" && <Cloze />}
+          {selectedOption === "cloze" && <Cloze setClozeData={setClozeData} />}
         </div>
         <div className="flex flex-col justify-center">
-          {selectedOption === "comprehension" && <Comprehension />}
+          {selectedOption === "comprehension" && (
+            <Comprehension setComprehensionData={setComprehensionData} />
+          )}
         </div>
       </div>
     </div>

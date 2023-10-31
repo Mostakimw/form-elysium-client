@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-const Comprehension = () => {
+const Comprehension = ({ setComprehensionData }) => {
   const [passage, setPassage] = useState("");
   const [questions, setQuestions] = useState([]);
   const [newQuestion, setNewQuestion] = useState({
@@ -43,6 +43,20 @@ const Comprehension = () => {
       options: updatedOptions,
     });
   };
+
+  // Use useEffect to watch for changes in comprehensionData
+  useEffect(() => {
+    // Create the comprehensionData object inside the useEffect
+    const comprehensionData = {
+      passage: passage,
+      questions: questions.map((q) => ({
+        question: q.question,
+        options: q.options,
+      })),
+    };
+
+    setComprehensionData(comprehensionData);
+  }, [passage, questions, setComprehensionData]);
 
   return (
     <>

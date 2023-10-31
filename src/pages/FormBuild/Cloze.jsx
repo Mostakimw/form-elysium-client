@@ -4,12 +4,11 @@ import { RxCross1 } from "react-icons/rx";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 
-function Cloze() {
+const Cloze = ({ setClozeData }) => {
   const [text, setText] = useState("");
   const [previewText, setPreviewText] = useState(""); // State for the sanitized preview text
   const [options, setOptions] = useState([]); // Array to store options
   const quillRef = useRef();
-
   // Function to handle changes in the ReactQuill editor
   const handleChange = (value) => {
     setText(value);
@@ -29,8 +28,21 @@ function Cloze() {
         true
       );
       const optionText = quill.getText(selectedText.index, selectedText.length);
-      setOptions([...options, optionText]); // Add the selected text to the 'options' array
-      quill.setSelection(null); // Clear the selection (optional)
+      console.log("test option", optionText);
+      // check if any text selected
+      if (optionText.length > 0) {
+        setOptions([...options, optionText]); // Add the selected text to the 'options' array}
+
+        quill.setSelection(null); // Clear the selection
+      } else {
+        alert("Please add text for the option.");
+      }
+      // Update the question data and pass it to the FormBuild component
+      const updatedQuestion = {
+        text: previewText,
+        options: [...options, optionText],
+      };
+      setClozeData(updatedQuestion);
     }
     updatePreview(text); // Update the sanitized preview text
   };
@@ -48,6 +60,13 @@ function Cloze() {
     setPreviewText(sanitizedText);
   };
 
+  // Create an array that combines the preview text and options
+
+  const question = {
+    text: previewText,
+    options: options,
+  };
+  console.log(question);
   return (
     <>
       <div className="flex gap-16 px-16 mt-10">
@@ -72,6 +91,7 @@ function Cloze() {
         {/* options */}
         <div>
           <h2 className="font-bold text-xl text-gray-800">Options:</h2>
+
           <ul className="mt-5">
             {options.map((option, index) => (
               <li
@@ -92,6 +112,6 @@ function Cloze() {
       </div>
     </>
   );
-}
+};
 
 export default Cloze;

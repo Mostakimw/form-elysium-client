@@ -3,20 +3,22 @@ import { BiCategoryAlt } from "react-icons/bi";
 import { RxCross1 } from "react-icons/rx";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 
-const Categorize = () => {
+const Categorize = ({ setCategorizeData }) => {
   const [categories, setCategories] = useState([]);
   const [newCategoryAnswer, setNewCategoryAnswer] = useState({
     category: "",
     answer: "",
   });
-  console.log(categories);
 
+  // category adding function
   const handleCategoryAdd = () => {
     if (
       newCategoryAnswer.category.trim() !== "" &&
       newCategoryAnswer.answer.trim() !== ""
     ) {
-      setCategories([...categories, newCategoryAnswer]);
+      const updateData = [...categories, newCategoryAnswer];
+      setCategories(updateData);
+      setCategorizeData(updateData);
       setNewCategoryAnswer({ category: "", answer: "" });
     }
   };
@@ -28,7 +30,6 @@ const Categorize = () => {
   };
 
   //   handle drag and drop
-
   const handleDragEnd = (result) => {
     if (!result.destination) {
       return; // Return if the item was dropped outside of the list
