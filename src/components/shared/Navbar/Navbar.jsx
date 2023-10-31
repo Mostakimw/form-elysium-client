@@ -73,7 +73,12 @@ const Navbar = () => {
         >
           <ul className="text-sm lg:flex gap-4 mx-auto">{navLinks}</ul>
           <div>
-            <Link to="/login">Login</Link>
+            <Link
+              className="px-3 py-2 text-white font-semibold text-xl bg-purple-700 duration-150 rounded-md hover:bg-purple-600"
+              to="/login"
+            >
+              Login
+            </Link>
           </div>
         </div>
       </nav>

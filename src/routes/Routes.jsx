@@ -3,6 +3,7 @@ import App from "../App";
 import Home from "../pages/Home/Home";
 import Login from "../pages/Login/Login";
 import Register from "../Register/Register";
+import FormBuild from "../pages/FormBuild/FormBuild";
 
 const router = createBrowserRouter([
   {
@@ -15,7 +16,7 @@ const router = createBrowserRouter([
       },
       {
         path: "build-form",
-        element: <Home />,
+        element: <FormBuild />,
       },
       {
         path: "dashboard",

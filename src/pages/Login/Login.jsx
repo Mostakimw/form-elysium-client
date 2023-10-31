@@ -3,12 +3,10 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../providers/AuthProvider";
 
 const Login = () => {
-  const { loginUser, user, googleSignIn } = useContext(AuthContext);
-  console.log(loginUser);
+  const { loginUser, user, googleLogin } = useContext(AuthContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-  console.log(email, password);
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -25,9 +23,10 @@ const Login = () => {
       });
   };
 
-  const googleLogin = () => {
-    googleSignIn().then(() => {
+  const handleGoogle = () => {
+    googleLogin().then(() => {
       navigate(from, { replace: true });
+      console.log("google login");
     });
   };
 
@@ -101,7 +100,7 @@ const Login = () => {
               {/* google login  */}
               <div className="flex justify-center mt-5">
                 <button
-                  onClick={googleLogin}
+                  onClick={handleGoogle}
                   className="w-2/3 flex items-center border-2 rounded-md p-2"
                 >
                   <img
