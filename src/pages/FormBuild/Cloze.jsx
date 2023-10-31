@@ -50,7 +50,7 @@ function Cloze() {
 
   return (
     <>
-      <div className="flex gap-16 px-16">
+      <div className="flex gap-16 px-16 mt-10">
         <div>
           <div className="mb-12">
             {/* preview question */}
