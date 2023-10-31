@@ -26,7 +26,6 @@ const Login = () => {
   const handleGoogle = () => {
     googleLogin().then(() => {
       navigate(from, { replace: true });
-      console.log("google login");
     });
   };
 

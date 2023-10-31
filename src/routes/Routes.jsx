@@ -4,6 +4,7 @@ import Home from "../pages/Home/Home";
 import Login from "../pages/Login/Login";
 import Register from "../Register/Register";
 import FormBuild from "../pages/FormBuild/FormBuild";
+import PrivateRoute from "./PrivateRoute";
 
 const router = createBrowserRouter([
   {
@@ -16,7 +17,11 @@ const router = createBrowserRouter([
       },
       {
         path: "build-form",
-        element: <FormBuild />,
+        element: (
+          <PrivateRoute>
+            <FormBuild />
+          </PrivateRoute>
+        ),
       },
       {
         path: "dashboard",

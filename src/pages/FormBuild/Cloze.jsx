@@ -28,7 +28,6 @@ const Cloze = ({ setClozeData }) => {
         true
       );
       const optionText = quill.getText(selectedText.index, selectedText.length);
-      console.log("test option", optionText);
       // check if any text selected
       if (optionText.length > 0) {
         setOptions([...options, optionText]); // Add the selected text to the 'options' array}
@@ -60,13 +59,6 @@ const Cloze = ({ setClozeData }) => {
     setPreviewText(sanitizedText);
   };
 
-  // Create an array that combines the preview text and options
-
-  const question = {
-    text: previewText,
-    options: options,
-  };
-  console.log(question);
   return (
     <>
       <div className="flex gap-16 px-16 mt-10">

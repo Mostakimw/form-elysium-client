@@ -3,7 +3,8 @@ import { AuthContext } from "../providers/AuthProvider";
 import { Link } from "react-router-dom";
 
 const Register = () => {
-  const { registerUser } = useContext(AuthContext);
+  const { registerUser, updateUserProfile } = useContext(AuthContext);
+  console.log(updateUserProfile);
   const [user, setUser] = useState(false);
   const [email, setEmail] = useState("");
   const [name, setName] = useState("");
@@ -14,17 +15,20 @@ const Register = () => {
   const handleRegister = (e) => {
     e.preventDefault();
 
-    // password validation check
-    if (!/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/.test(password)) {
-      setError("password should be 8 char with uppercase");
+    // validation
+    if (!name || !email || !password) {
+      setError("Please fill in all fields");
       return;
     }
 
+    // register user
     registerUser(email, password)
-      .then((result) => {
-        const loggedUser = result.user;
-        setUser(loggedUser);
+      .then(() => {
+        setUser(true);
         setSuccess("Registration Successful");
+        updateUserProfile(name)
+          .then(() => {})
+          .catch(() => {});
       })
       .catch(() => {
         setError("Something went wrong");

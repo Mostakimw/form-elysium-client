@@ -1,7 +1,9 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import Categorize from "./Categorize";
 import Cloze from "./Cloze";
 import Comprehension from "./Comprehension";
+import { MdPreview } from "react-icons/md";
 
 const FormBuild = () => {
   const [formName, setFormName] = useState("");
@@ -10,7 +12,6 @@ const FormBuild = () => {
   const [categorizeData, setCategorizeData] = useState({});
   const [clozeData, setClozeData] = useState({});
   const [comprehensionData, setComprehensionData] = useState([]);
-  console.log("object from build", comprehensionData);
 
   const handleFormNameChange = (e) => {
     const newName = e.target.value;
@@ -29,21 +30,29 @@ const FormBuild = () => {
       </div>
       <div className="border-2 max-w-4xl py-16 px-10 mx-auto mt-12">
         {/* form name and preview and save */}
-        <div className="flex gap-4 mb-10">
+        <div className="flex items-center gap-12 mb-10">
+          {/* form name */}
           <div>
             <input
               type="text"
               name="name"
               value={formName}
+              className="border px-3 py-2 rounded-md"
               onChange={handleFormNameChange}
               placeholder="Enter Form Name"
             />
           </div>
+          {/* preview btn  */}
           <div>
-            <button>Preview</button>
+            <Link>
+              <button className="text-2xl" title="Preview">
+                <MdPreview />
+              </button>
+            </Link>
           </div>
+          {/* save btn  */}
           <div>
-            <button>Save</button>
+            <button className="my-btn">Save</button>
           </div>
         </div>
         {/* category select section */}

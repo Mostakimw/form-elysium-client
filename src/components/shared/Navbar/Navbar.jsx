@@ -1,9 +1,19 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
+import { AuthContext } from "../../../providers/AuthProvider";
 
 const Navbar = () => {
+  const { user, logoutUser } = useContext(AuthContext);
+  console.log(user);
   const [isOpen, setIsOpen] = useState(false);
+  //  logout handler
+  const handleLogout = () => {
+    logoutUser()
+      .then(() => {})
+      .catch(() => {});
+  };
 
+  // nav items
   const navLinks = (
     <>
       <li>
@@ -30,6 +40,34 @@ const Navbar = () => {
           Dashboard
         </NavLink>
       </li>
+    </>
+  );
+
+  // user menu
+  const userMenu = (
+    <>
+      {user ? (
+        <>
+          <div>
+            <button
+              onClick={handleLogout}
+              className="bg-purple-500 hover:bg-purple-600 duration-300 text-gray-200 px-4 py-2 rounded-md"
+            >
+              Logout
+            </button>
+            <button className="border-2 border-purple-500 hover:bg-purple-600 hover:text-gray-200 duration-300 text-gray-800 px-4 py-2 md:ml-2 max-sm:mt-1 rounded-md">
+              {user?.displayName}
+            </button>
+          </div>
+        </>
+      ) : (
+        <Link
+          to="/login"
+          className="bg-purple-500 hover:bg-purple-600 duration-300 text-gray-200 px-4 py-2 rounded-md"
+        >
+          Login
+        </Link>
+      )}
     </>
   );
 
@@ -72,14 +110,7 @@ const Navbar = () => {
           }`}
         >
           <ul className="text-sm lg:flex gap-4 mx-auto">{navLinks}</ul>
-          <div>
-            <Link
-              className="px-3 py-2 text-white font-semibold text-xl bg-purple-700 duration-150 rounded-md hover:bg-purple-600"
-              to="/login"
-            >
-              Login
-            </Link>
-          </div>
+          <div>{userMenu}</div>
         </div>
       </nav>
     </div>
