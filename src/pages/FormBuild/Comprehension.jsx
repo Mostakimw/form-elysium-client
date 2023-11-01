@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import toast from "react-hot-toast";
 
 const Comprehension = ({ setComprehensionData }) => {
   const [passage, setPassage] = useState("");
@@ -54,8 +55,11 @@ const Comprehension = ({ setComprehensionData }) => {
         options: q.options,
       })),
     };
-
-    setComprehensionData(comprehensionData);
+    if (comprehensionData.length > 0) {
+      setComprehensionData(comprehensionData);
+    } else {
+      toast.error("add comprehension data first");
+    }
   }, [passage, questions, setComprehensionData]);
 
   return (

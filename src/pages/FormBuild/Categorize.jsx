@@ -3,7 +3,7 @@ import { BiCategoryAlt } from "react-icons/bi";
 import { RxCross1 } from "react-icons/rx";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 
-const Categorize = ({ setCategorizeData }) => {
+const Categorize = ({ setCategorizeData, categorizeData }) => {
   const [categories, setCategories] = useState([]);
   const [newCategoryAnswer, setNewCategoryAnswer] = useState({
     category: "",
@@ -17,6 +17,7 @@ const Categorize = ({ setCategorizeData }) => {
       newCategoryAnswer.answer.trim() !== ""
     ) {
       const updateData = [...categories, newCategoryAnswer];
+
       setCategories(updateData);
       setCategorizeData(updateData);
       setNewCategoryAnswer({ category: "", answer: "" });
@@ -49,6 +50,15 @@ const Categorize = ({ setCategorizeData }) => {
         <div>
           {/* showing all categories here  */}
           <h1 className="font-semibold text-2xl">Items</h1>
+
+          {/* // Validation message for no categories */}
+          <div>
+            {categories.length === 0 && categorizeData.length === 0 && (
+              <p className="text-red-500 mt-3">
+                Please add at least one category with an answer.
+              </p>
+            )}
+          </div>
 
           {/* drag and drop functionality for category  */}
 

@@ -1,17 +1,70 @@
-import { useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Categorize from "./Categorize";
 import Cloze from "./Cloze";
 import Comprehension from "./Comprehension";
 import { MdPreview } from "react-icons/md";
+import { AuthContext } from "../../providers/AuthProvider";
+import axios from "axios";
+import toast from "react-hot-toast";
 
 const FormBuild = () => {
+  const { user } = useContext(AuthContext);
   const [formName, setFormName] = useState("");
   const [selectedOption, setSelectedOption] = useState("");
+  const [isFormValid, setIsFormValid] = useState(true);
 
   const [categorizeData, setCategorizeData] = useState({});
   const [clozeData, setClozeData] = useState({});
   const [comprehensionData, setComprehensionData] = useState([]);
+
+  const isCategorizeDataValid = categorizeData.length > 0;
+
+  useEffect(() => {
+    setIsFormValid(
+      !!formName && !!categorizeData && !!clozeData && !!comprehensionData
+    );
+  }, [formName, categorizeData, clozeData, comprehensionData]);
+
+  const formDataItem = {
+    formName: formName,
+    user: user?.email,
+    categorizeData: categorizeData,
+    clozeData: clozeData,
+    comprehensionData: comprehensionData,
+  };
+
+  // handle save form data
+  const handleSaveFormData = () => {
+    console.log(formDataItem);
+    if (isFormValid && isCategorizeDataValid) {
+      saveFormData(formDataItem);
+    } else {
+      toast.error(
+        <div>
+          Form is not valid. Please give a{" "}
+          <span style={{ fontWeight: "bold" }}>Form name</span> and fill at
+          least one type question.
+        </div>
+      );
+    }
+  };
+
+  // saving form data to db
+  const saveFormData = async (formData) => {
+    try {
+      const response = await axios.post(
+        `${import.meta.env.VITE_apiLink}/api/saveFormData`,
+        formData
+      );
+      console.log(response.data);
+      if (response.data.insertedId) {
+        toast.success("Form Created!");
+      }
+    } catch (err) {
+      console.error("Error saving form data:", err);
+    }
+  };
 
   const handleFormNameChange = (e) => {
     const newName = e.target.value;
@@ -52,7 +105,9 @@ const FormBuild = () => {
           </div>
           {/* save btn  */}
           <div>
-            <button className="my-btn">Save</button>
+            <button className="my-btn" onClick={handleSaveFormData}>
+              Save
+            </button>
           </div>
         </div>
         {/* category select section */}
@@ -74,7 +129,10 @@ const FormBuild = () => {
         {/* Rendering Questions types here */}
         <div className="flex flex-col items-center justify-center">
           {selectedOption === "categorize" && (
-            <Categorize setCategorizeData={setCategorizeData} />
+            <Categorize
+              setCategorizeData={setCategorizeData}
+              categorizeData={categorizeData}
+            />
           )}
         </div>
         <div className="flex flex-col justify-center">
