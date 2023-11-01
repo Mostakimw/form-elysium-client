@@ -6,6 +6,7 @@ import Register from "../Register/Register";
 import FormBuild from "../pages/FormBuild/FormBuild";
 import PrivateRoute from "./PrivateRoute";
 import Dashboard from "../pages/Dashboard/Dashboard";
+import Preview from "../pages/Preview/Preview";
 
 const router = createBrowserRouter([
   {
@@ -29,6 +30,10 @@ const router = createBrowserRouter([
         element: <Dashboard />,
       },
     ],
+  },
+  {
+    path: "preview-form/:formId",
+    element: <Preview />,
   },
 
   {

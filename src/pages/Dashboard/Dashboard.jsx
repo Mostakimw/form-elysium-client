@@ -1,39 +1,22 @@
-import axios from "axios";
+// import axios from "axios";
 import { useContext } from "react";
 import { BiPlus } from "react-icons/bi";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../providers/AuthProvider";
-import { useQuery } from "@tanstack/react-query";
+// import { useQuery } from "@tanstack/react-query";
 import Loading from "../../components/Loading";
 import FormTable from "./FormTable";
+import useFormData from "../../hooks/useFormData";
 
 const Dashboard = () => {
   const { user } = useContext(AuthContext);
+  const [formData, isLoading] = useFormData();
 
-  const getUserForm = async () => {
-    const response = await axios.get(
-      `${import.meta.env.VITE_apiLink}/api/getFormData?email=${user?.email}`
-    );
-    return response.data;
-  };
-
-  // react query
-  const {
-    data: formData = [],
-    error,
-    isLoading,
-  } = useQuery({
-    queryKey: ["getFormData"],
-    queryFn: getUserForm,
-  });
   if (isLoading) {
     return <Loading></Loading>;
   }
-  if (error) {
-    return <div>Error: {error.message}</div>;
-  }
 
-  console.log(formData[0]);
+  console.log(formData);
 
   return (
     <>
@@ -47,14 +30,10 @@ const Dashboard = () => {
           </button>
         </Link>
       </div>
+
       {/* table start  */}
-      {formData.length === 0 ? (
-        <>
-          <div className="p-6 shadow-lg w-fit mx-auto">
-            <h1>Please Build A Form First To See Your Form</h1>
-          </div>
-        </>
-      ) : (
+
+      {formData.length !== 0 ? (
         <section className="container mx-auto p-6 font-mono">
           <div className="w-full mb-8 overflow-hidden rounded-lg shadow-lg">
             <div className="w-full overflow-x-auto">
@@ -63,6 +42,7 @@ const Dashboard = () => {
                   <tr className="text-md font-semibold tracking-wide text-left text-gray-900 bg-gray-100 uppercase border-b border-gray-600">
                     <th className="px-4 py-3">Form Name</th>
                     <th className="px-4 py-3">Response</th>
+                    <th className="px-4 py-3">Shareable Link</th>
                     <th className="px-4 py-3">Date</th>
                     <th className="px-4 py-3">Action</th>
                   </tr>
@@ -74,6 +54,10 @@ const Dashboard = () => {
             </div>
           </div>
         </section>
+      ) : (
+        <div className="p-6 shadow-lg w-fit mx-auto">
+          <h1>Please Build A Form First To See Your Form</h1>
+        </div>
       )}
     </>
   );

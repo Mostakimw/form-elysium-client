@@ -20,19 +20,32 @@ const FormBuild = () => {
 
   const isCategorizeDataValid = categorizeData.length > 0;
 
+  // form validation
   useEffect(() => {
     setIsFormValid(
       !!formName && !!categorizeData && !!clozeData && !!comprehensionData
     );
   }, [formName, categorizeData, clozeData, comprehensionData]);
 
+  // form data
   const formDataItem = {
     formName: formName,
+    formId: generateUniqueFormId(),
     user: user?.email,
+    response: 0,
     categorizeData: categorizeData,
     clozeData: clozeData,
     comprehensionData: comprehensionData,
+    date: new Date(),
   };
+
+  // Function to generate a unique form ID
+  function generateUniqueFormId() {
+    const timestamp = new Date().getTime();
+    const randomValue = Math.floor(1000 + Math.random() * 9000);
+    const formId = `${timestamp}${randomValue}`;
+    return formId;
+  }
 
   // handle save form data
   const handleSaveFormData = () => {
@@ -97,7 +110,7 @@ const FormBuild = () => {
           </div>
           {/* preview btn  */}
           <div>
-            <Link>
+            <Link to="/preview-form">
               <button className="text-2xl" title="Preview">
                 <MdPreview />
               </button>
