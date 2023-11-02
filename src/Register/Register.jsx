@@ -12,7 +12,6 @@ const Register = () => {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
   const userData = { email, name };
-  console.log(userData);
 
   const navigate = useNavigate();
   const location = useLocation();

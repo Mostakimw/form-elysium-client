@@ -6,8 +6,7 @@ import Register from "../Register/Register";
 import FormBuild from "../pages/FormBuild/FormBuild";
 import PrivateRoute from "./PrivateRoute";
 import Dashboard from "../pages/Dashboard/Dashboard";
-import Preview from "../pages/Preview/Preview";
-import FormFillingSystem from "../pages/Form/FormFillingSystem";
+// import Preview from "../pages/Preview/Preview";
 
 const router = createBrowserRouter([
   {
@@ -32,15 +31,10 @@ const router = createBrowserRouter([
       },
     ],
   },
-  {
-    path: "preview-form/:formId",
-    element: <Preview />,
-  },
-  {
-    path: "preview-forms",
-    element: <FormFillingSystem />,
-  },
-
+  // {
+  //   path: "preview-form/:formId",
+  //   element: <Preview />,
+  // },
   {
     path: "login",
     element: <Login />,

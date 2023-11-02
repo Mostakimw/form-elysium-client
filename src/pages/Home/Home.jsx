@@ -39,7 +39,7 @@ const Home = () => {
               />
             </div>
             <div className="flex justify-center">
-              <Link to="/login">
+              <Link to="/build-form">
                 <button className="my-btn">Get Started</button>
               </Link>
             </div>

@@ -10,9 +10,8 @@ const FormTable = ({ formData }) => {
   const handleDeleteSingleForm = async (formId) => {
     try {
       const response = await axios.delete(
-        `http://localhost:5000/api/deleteFormData?formId=${formId}`
+        `${import.meta.env.VITE_apiLink}/api/deleteFormData?formId=${formId}`
       );
-      console.log(response);
       if (response.data.deletedCount > 0) {
         toast.success("Form deleted successfully.");
         refetch();

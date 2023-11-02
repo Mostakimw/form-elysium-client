@@ -9,10 +9,10 @@ const Preview = () => {
   const { isLoading } = useSpecificFormData(formId);
   const methods = useForm();
 
-  const onSubmit = (data) => {
-    // You can handle form submission here
-    console.log(data);
-  };
+  // const onSubmit = (data) => {
+  //   // You can handle form submission here
+
+  // };
 
   if (isLoading) {
     return <div>Loading...</div>;

@@ -27,12 +27,10 @@ const Login = () => {
   const handleGoogle = () => {
     googleLogin().then((result) => {
       //save user data
-      console.log("google", result.user);
       const userData = {
         email: result?.user?.email,
         name: result?.user?.displayName,
       };
-      console.log(userData);
       saveUserToDb(userData);
       navigate(from, { replace: true });
     });

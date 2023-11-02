@@ -49,9 +49,14 @@ const FormBuild = () => {
 
   // handle save form data
   const handleSaveFormData = () => {
-    console.log(formDataItem);
     if (isFormValid && isCategorizeDataValid) {
       saveFormData(formDataItem);
+      // Clear the form data after saving
+      setFormName("");
+      setSelectedOption("");
+      setCategorizeData({});
+      setClozeData({});
+      setComprehensionData([]);
     } else {
       toast.error(
         <div>
@@ -70,7 +75,6 @@ const FormBuild = () => {
         `${import.meta.env.VITE_apiLink}/api/saveFormData`,
         formData
       );
-      console.log(response.data);
       if (response.data.insertedId) {
         toast.success("Form Created!");
       }
