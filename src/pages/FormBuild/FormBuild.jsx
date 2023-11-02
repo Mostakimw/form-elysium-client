@@ -90,7 +90,7 @@ const FormBuild = () => {
   };
 
   return (
-    <div>
+    <div className="max-w-7xl mx-auto min-h-[calc(100vh-288px)]">
       <div>
         <h1 className="title mt-12">Build Your First Form</h1>
       </div>

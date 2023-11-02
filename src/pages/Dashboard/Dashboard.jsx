@@ -19,7 +19,7 @@ const Dashboard = () => {
   console.log(formData);
 
   return (
-    <>
+    <div className="max-w-7xl mx-auto min-h-[calc(100vh-288px)]">
       <div className="container p-6">
         <h1 className="my-2 text-xl font-semibold">
           {user?.displayName} - {formData.length} Form Created
@@ -59,7 +59,7 @@ const Dashboard = () => {
           <h1>Please Build A Form First To See Your Form</h1>
         </div>
       )}
-    </>
+    </div>
   );
 };
 

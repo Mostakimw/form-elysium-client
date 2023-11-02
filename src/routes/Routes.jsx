@@ -7,6 +7,7 @@ import FormBuild from "../pages/FormBuild/FormBuild";
 import PrivateRoute from "./PrivateRoute";
 import Dashboard from "../pages/Dashboard/Dashboard";
 import Preview from "../pages/Preview/Preview";
+import FormFillingSystem from "../pages/Form/FormFillingSystem";
 
 const router = createBrowserRouter([
   {
@@ -14,7 +15,7 @@ const router = createBrowserRouter([
     element: <App />,
     children: [
       {
-        path: "home",
+        path: "/",
         element: <Home />,
       },
       {
@@ -34,6 +35,10 @@ const router = createBrowserRouter([
   {
     path: "preview-form/:formId",
     element: <Preview />,
+  },
+  {
+    path: "preview-forms",
+    element: <FormFillingSystem />,
   },
 
   {
