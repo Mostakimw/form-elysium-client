@@ -13,7 +13,7 @@ const useFormData = () => {
     queryKey: ["getFormData"],
     queryFn: async () => {
       const res = await axios.get(
-        `${import.meta.env.VITE_apiLink}/api/getFormData?email=${user?.email}`
+        `https://form-elysium-server-mostakimw.vercel.app/api/getFormData?email=${user?.email}`
       );
       return res.data;
     },

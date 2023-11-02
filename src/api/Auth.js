@@ -3,7 +3,7 @@ const saveUserToDb = (user) => {
     email: user?.email,
     name: user?.name,
   };
-  fetch(`${import.meta.env.VITE_apiLink}/api/users`, {
+  fetch(`https://form-elysium-server-mostakimw.vercel.app/api/users`, {
     method: "POST",
     headers: {
       "content-type": "application/json",

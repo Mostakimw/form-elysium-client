@@ -10,7 +10,7 @@ const FormTable = ({ formData }) => {
   const handleDeleteSingleForm = async (formId) => {
     try {
       const response = await axios.delete(
-        `${import.meta.env.VITE_apiLink}/api/deleteFormData?formId=${formId}`
+        `https://form-elysium-server-mostakimw.vercel.app/api/deleteFormData?formId=${formId}`
       );
       if (response.data.deletedCount > 0) {
         toast.success("Form deleted successfully.");
