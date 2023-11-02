@@ -1,8 +1,30 @@
 import { MdDelete } from "react-icons/md";
 import moment from "moment";
 import { Link } from "react-router-dom";
+import axios from "axios";
+import toast from "react-hot-toast";
+import useFormData from "../../hooks/useFormData";
 
 const FormTable = ({ formData }) => {
+  const [, , refetch] = useFormData();
+  const handleDeleteSingleForm = async (formId) => {
+    try {
+      const response = await axios.delete(
+        `http://localhost:5000/api/deleteFormData?formId=${formId}`
+      );
+      console.log(response);
+      if (response.data.deletedCount > 0) {
+        toast.success("Form deleted successfully.");
+        refetch();
+      } else {
+        toast.error("Form deletion failed.");
+      }
+    } catch (error) {
+      toast.error("Error deleting form:", error);
+      console.error("Error deleting form:", error);
+    }
+  };
+
   return (
     <>
       {formData.map((form, index) => (
@@ -24,7 +46,7 @@ const FormTable = ({ formData }) => {
             {moment(form.date).format("M/D/YYYY")}
           </td>
           <td className="px-4 py-3 text-xl border">
-            <button>
+            <button onClick={() => handleDeleteSingleForm(form?.formId)}>
               <MdDelete></MdDelete>
             </button>
           </td>

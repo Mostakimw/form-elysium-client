@@ -3,7 +3,6 @@ import { useContext } from "react";
 import { BiPlus } from "react-icons/bi";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../providers/AuthProvider";
-// import { useQuery } from "@tanstack/react-query";
 import Loading from "../../components/Loading";
 import FormTable from "./FormTable";
 import useFormData from "../../hooks/useFormData";
@@ -15,8 +14,6 @@ const Dashboard = () => {
   if (isLoading) {
     return <Loading></Loading>;
   }
-
-  console.log(formData);
 
   return (
     <div className="max-w-7xl mx-auto min-h-[calc(100vh-288px)]">
